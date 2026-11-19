@@ -1,0 +1,26 @@
+{
+  "name": "laidanla-marketplace-refined",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5174 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "element-plus": "^2.14.8",
+    "lucide-vue-next": "^0.468.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^5.4.11"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

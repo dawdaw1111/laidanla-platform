@@ -1,0 +1,1 @@
+<template><main id="page-content" class="app-ui page-container"><el-empty description="这个页面暂时找不到了"><RouterLink to="/tasks"><el-button type="primary">返回任务广场</el-button></RouterLink></el-empty></main></template>

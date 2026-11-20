@@ -6,6 +6,14 @@ import SiteHeader from './components/SiteHeader.vue'
 import WorkspaceShell from './components/WorkspaceShell.vue'
 import { persistence } from './lib/store'
 const route=useRoute(),router=useRouter()
+const skipTarget = computed(() => route.path === '/tasks' ? 'square-grid' : 'page-content')
+function skipToContent() {
+  const target = document.getElementById(skipTarget.value)
+  if (!target) return
+  if (!target.hasAttribute('tabindex')) target.tabIndex = -1
+  target.focus({ preventScroll: true })
+  target.scrollIntoView()
+}
 const refinementClass=computed(()=>{
   const path=route.path
   if(path==='/login'||path==='/merchant')return ''
@@ -18,7 +26,7 @@ function openTask(task){router.push(`/tasks/${task.id}`)}
 </script>
 <template>
   <el-config-provider :locale="zhCn">
-    <a class="skip-link" :href="route.path==='/tasks'?'#square-grid':'#page-content'">跳到页面内容</a>
+    <a class="skip-link" :href="'#' + skipTarget" @click.prevent="skipToContent">跳到页面内容</a>
     <SiteHeader :active-page="route.meta.nav" @navigate="go" @open-modal="action"/>
     <WorkspaceShell v-if="route.meta.shell" :kind="route.meta.shell"><RouterView :key="route.path" :class="refinementClass" /></WorkspaceShell>
     <RouterView v-else :key="route.path" :class="refinementClass" @open-task="openTask" />

@@ -1,3 +1,4 @@
+import { assetUrl } from '../lib/assets.js'
 // Local examples for the task square. Replace this collection with the task API later.
 const examples = [
   { title: '护肤新品主图设计 · 5张', category: '商品主图', mode: '一口价', price: 600, art: 'skincare', remaining: 62, filled: 5, capacity: 10, description: '为护肤新品制作 5 张商品主图，突出产品质感与核心卖点。保留商品外观与包装信息，以温暖、自然的光影呈现产品。', deliverables: '5 张高清商品主图，800 × 800 px，JPG / PNG 格式' },
@@ -26,5 +27,5 @@ export const squareTasks = examples.map((task, index) => ({
   days: 3,
   revisions: 2,
   publishedOrder: index + 1,
-  image: `/assets/task-square/${task.art}.webp`,
+  image: assetUrl(`task-square/${task.art}.webp`),
 }))

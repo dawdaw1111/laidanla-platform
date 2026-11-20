@@ -1,8 +1,9 @@
+import { assetUrl } from './assets.js'
 import { reactive, watch } from 'vue'
 import { squareTasks } from '../data/squareTasks'
 
 export const money = (cents) => (Number(cents || 0) / 100).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-export const imageOf = (art = 'skincare') => `/assets/task-square/${art}.webp`
+export const imageOf = (art = 'skincare') => assetUrl(`task-square/${art}.webp`)
 export const stamp = () => new Date().toLocaleString('sv-SE').slice(0, 16)
 export const uid = (prefix) => `${prefix}${Date.now()}${Math.random().toString(36).slice(2, 6)}`
 export const income = (cents) => Math.round(cents * 85 / 100)
@@ -31,8 +32,8 @@ const defaults = () => ({
     { id:'F4',at:'2026-11-14 16:42',type:'解冻',title:'咖啡新品推广短视频 · 15秒',cents:30000,status:'已完成' },
   ],
   merchantFlows: squareTasks.slice(0,7).map((t,i)=>({id:`MF${i}`,at:`2026-11-${18-i} 14:26`,type:i===3?'分账':i===6?'退款':'托管冻结',title:t.title,cents:t.price*100,status:i===3||i===6?'已完成':'处理中',ref:`DEMO****${4821+i*173}`})),
-  chats: { merchant: [{ mine:false,text:'请把背景调整得更明亮一些，谢谢。',at:'09:42' },{ mine:true,text:'收到，我会保留产品细节并调整光影。',at:'09:46' },{ mine:true,image:'/assets/pages/delivery-1.webp',text:'主图光影调整参考',at:'09:56' }], creator:[{mine:false,text:'您好，我已查看需求，想确认主图的背景风格。',at:'昨天 17:20'}], support:[{mine:false,text:'你好，这里是来单啦演示客服会话。你可以在这里记录问题，当前不会发送给真人客服。',at:'10:24'}], official:[{mine:false,text:'欢迎来到来单啦。当前为界面演示，任务、认证与资金均为示例。',at:'10:24'}] },
-  portfolio: ['skincare','fashion','coffee','extra1','extra2','extra3'].map((art,i)=>({id:`P${i}`,title:['护肤新品主图设计','秋冬女装海报视觉','咖啡新品推广视觉','香水产品主图精修','口红新品详情图','精华液产品视觉图'][i],image:i<3?imageOf(art):`/assets/pages/portfolio-${i-2}.webp`,tool:'即梦 / 人工精修',hours:2})),
+  chats: { merchant: [{ mine:false,text:'请把背景调整得更明亮一些，谢谢。',at:'09:42' },{ mine:true,text:'收到，我会保留产品细节并调整光影。',at:'09:46' },{ mine:true,image:assetUrl('pages/delivery-1.webp'),text:'主图光影调整参考',at:'09:56' }], creator:[{mine:false,text:'您好，我已查看需求，想确认主图的背景风格。',at:'昨天 17:20'}], support:[{mine:false,text:'你好，这里是来单啦演示客服会话。你可以在这里记录问题，当前不会发送给真人客服。',at:'10:24'}], official:[{mine:false,text:'欢迎来到来单啦。当前为界面演示，任务、认证与资金均为示例。',at:'10:24'}] },
+  portfolio: ['skincare','fashion','coffee','extra1','extra2','extra3'].map((art,i)=>({id:`P${i}`,title:['护肤新品主图设计','秋冬女装海报视觉','咖啡新品推广视觉','香水产品主图精修','口红新品详情图','精华液产品视觉图'][i],image:i<3?imageOf(art):assetUrl(`pages/portfolio-${i-2}.webp`),tool:'即梦 / 人工精修',hours:2})),
   draft: { category:'商品主图', title:'', link:'', description:'', requirements:'', count:5, size:'800 × 800', customSize:'', customWords:500, format:'JPG / PNG', tags:['场景图','精修'], bounty:600, days:3, revisions:2, mode:'一口价', slots:1, certifiedOnly:false, allowExtension:true, sourceFile:false, style:['亚洲'], scene:['纯色'], authorization:'', duration:'15s', videoTypes:['商品切片'], script:true, subtitles:true, pages:6, copy:true, platform:'小红书', words:'300', multiTitles:true, files:[] },
   disputes: [], reviews: [], lastSaved: '',
 })

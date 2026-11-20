@@ -1,4 +1,5 @@
 <script setup>
+import { assetUrl } from '../lib/assets.js'
 import { computed,ref,watch,onBeforeUnmount } from 'vue'
 import { useRoute,useRouter } from 'vue-router'
 import { ArrowRight,ArrowLeft,CheckCircle2,Headphones,Image,FilePenLine,Video,ShieldCheck,Info,Clock,Wallet,ClipboardCheck } from 'lucide-vue-next'
@@ -12,7 +13,7 @@ const selected=computed(()=>templates.find(t=>t.name===draft.category)||template
 const rules={title:[{required:true,min:5,max:50,message:'任务标题须为 5–50 字',trigger:'blur'}],description:[{required:true,min:10,max:2000,message:'需求描述须为 10–2000 字',trigger:'blur'}],bounty:[{required:true,type:'number',min:30,max:50000,message:'赏金范围为 ¥30–50,000',trigger:'change'}],authorization:[{required:true,min:5,message:'请说明原图授权情况（至少 5 字）',trigger:'blur'}]}
 let timer;watch(draft,()=>{saving.value=true;clearTimeout(timer);timer=setTimeout(()=>{saveDraft();saving.value=false},30000)},{deep:true});onBeforeUnmount(()=>{clearTimeout(timer);if(saving.value)saveDraft()})
 function choose(t){if(t.disabled)return;draft.category=t.name;draft.count=t.count;draft.tags=['场景图','精修'];draft.format=t.name==='短视频'?'MP4':t.name==='营销文案'?'DOCX / TXT':'JPG / PNG';draft.size=t.name==='模特换装'?'750 × 1000':'800 × 800'}
-function sample(){draft.files=[1,2,3].map(i=>({uid:`reference-${i}`,name:`示例参考-${i}.jpg`,image:`/assets/pages/delivery-${i}.webp`,size:180000,type:'image'}));if(!draft.title)draft.title=`${draft.category==='商品主图'?'护肤新品主图设计':draft.category+'制作'} · ${draft.count}${selected.value.unit}`;if(!draft.description)draft.description='为新品制作电商内容，突出产品质感与核心卖点。保留商品外观与包装信息，采用温暖自然的光影，整体风格简洁统一。';notify('已填入设计稿中的示例需求，可继续修改')}
+function sample(){draft.files=[1,2,3].map(i=>({uid:`reference-${i}`,name:`示例参考-${i}.jpg`,image:assetUrl(`pages/delivery-${i}.webp`),size:180000,type:'image'}));if(!draft.title)draft.title=`${draft.category==='商品主图'?'护肤新品主图设计':draft.category+'制作'} · ${draft.count}${selected.value.unit}`;if(!draft.description)draft.description='为新品制作电商内容，突出产品质感与核心卖点。保留商品外观与包装信息，采用温暖自然的光影，整体风格简洁统一。';notify('已填入设计稿中的示例需求，可继续修改')}
 const deliverySummary=computed(()=>{
  const size=draft.size==='自定义'?draft.customSize:draft.size
  const source=draft.sourceFile?'，含可编辑源文件':''

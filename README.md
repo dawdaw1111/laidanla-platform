@@ -4,6 +4,12 @@
 
 > **当前完成的是可交互的前端演示。** 登录、认证、支付、分账、提现、IM、审核和自动验收未接入正式后端；订单与资金变化是当前浏览器中的示例数据，不发生真实交易。
 
+## 在线演示
+
+- [来单啦首页](https://dawdaw1111.github.io/laidanla-platform/)
+- [20 个页面入口](https://dawdaw1111.github.io/laidanla-platform/preview.html)
+- [设计截图对比](https://dawdaw1111.github.io/laidanla-platform/review.html)
+
 ## 本地运行
 
 需要 Node.js 22+、npm。
@@ -29,7 +35,7 @@ npm run build
 npm run preview
 ```
 
-生产预览使用 4174。应用使用 history 路由；部署到静态托管时，业务路径需回退到 index.html。
+生产预览使用 4174。本地使用 history 路由。GitHub Pages 使用 `npm run build -- --mode pages` 构建，业务链接包含 `#/`，可直接打开和刷新。
 
 已完成 15 项 Chrome 端到端测试，以及 20 页在 1440 / 1024 / 390px 下的 60 次渲染检查、五类发布表单的 10 次补充检查。生产构建与预览检查通过；公共 JS 包仍有超过 500KB 的体积提示。
 
@@ -61,8 +67,8 @@ src/lib/              本地演示状态与操作
 src/router.js         路由
 src/refinement*.css   精修版界面规范与页面样式
 public/assets/        品牌图、作品示例、字体和截图
-public/preview.html   全部页面入口
-public/review.html    原版与精修版截图对比
+preview.html          全部页面入口
+review.html           原版与精修版截图对比
 scripts/              检查脚本
 tests/                Playwright 端到端测试
 docs/                 产品需求与技术规划
@@ -77,7 +83,7 @@ docs/                 产品需求与技术规划
 
 产品文档与技术方案保留原始规划，其中的后端、小程序、运营后台及资金服务不代表已经实现。文档中的历史产品名为「灵创集市」，当前产品名为「来单啦」。
 
-精修对比页面中「打开原版」链接指向本机 5173，仅在同时启动原版时可用；对比截图本身包含在仓库中，可以直接查看。
+精修对比页面中「打开原版」链接指向本机 5173，在本地同时启动原版时显示；对比截图也可在 Pages 上查看。
 
 ## 素材
 

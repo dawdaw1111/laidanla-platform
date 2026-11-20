@@ -1,4 +1,5 @@
 <script setup>
+import { assetUrl } from './lib/assets.js'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { ArrowLeft, ArrowRight, Bookmark, Check, ChevronDown, Clock3, Grid2X2, Image, Layers, LayoutGrid, List, RectangleEllipsis, RotateCcw, Search, ShieldCheck, Shirt, SlidersHorizontal, SquarePlay, X } from 'lucide-vue-next'
 import { squareTasks } from './data/squareTasks'
@@ -25,7 +26,7 @@ function readSaved() {
 onMounted(() => {
   // Use Taste Skill's unmodified micro-interaction layer only on this preview.
   const css = document.createElement('link')
-  css.rel = 'stylesheet'; css.href = '/assets/taste-kit/motion.css'; css.dataset.tasteMotion = ''
+  css.rel = 'stylesheet'; css.href = assetUrl('taste-kit/motion.css'); css.dataset.tasteMotion = ''
   document.head.append(css)
   document.documentElement.dataset.type = 'software'
   document.documentElement.dataset.radius = 'soft'

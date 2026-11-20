@@ -1,9 +1,10 @@
 <script setup>
+import { assetUrl } from '../lib/assets.js'
 import { computed } from 'vue'
 import { ArrowUpRight, Clock3, ShieldCheck, RefreshCw } from 'lucide-vue-next'
 const props=defineProps({task:{type:Object,required:true},eager:Boolean})
 defineEmits(['open'])
-const photo=computed(()=>props.task.image||'/assets/task-square/'+(props.task.art==='beauty'?'skincare':props.task.art)+'.webp')
+const photo=computed(()=>props.task.image||assetUrl(`task-square/${props.task.art==='beauty'?'skincare':props.task.art}.webp`))
 const participation=computed(()=>props.task.mode==='比稿'?(props.task.bids||0)+' 人已投标':Math.max(0,(props.task.capacity||1)-(props.task.filled||0))+' 个剩余名额')
 </script>
 <template>

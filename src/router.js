@@ -1,7 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 const home=()=>import('./pages/HomePage.vue')
 const publish=()=>import('./pages/PublishPage.vue')
-export const router=createRouter({history:createWebHistory(),scrollBehavior(to,from,saved){return saved||(to.path===from.path?false:{top:0})},routes:[
+const history = import.meta.env.MODE === 'pages'
+  ? createWebHashHistory(import.meta.env.BASE_URL)
+  : createWebHistory(import.meta.env.BASE_URL)
+export const router=createRouter({history,scrollBehavior(to,from,saved){return saved||(to.path===from.path?false:{top:0})},routes:[
   {path:'/',component:home,meta:{title:'让灵感，成为生意。',nav:'home'}},
   {path:'/tasks',component:()=>import('./TaskSquare.vue'),meta:{title:'任务广场',nav:'tasks'}},
   {path:'/tasks/taste',redirect:'/tasks'},
